@@ -11,7 +11,7 @@
     "test:integration": "npm test -- -c jest-integration-config.js",
     "test:watch": "npm test -- --watch",
     "prepare": "husky install",
-    "test:staged": "npm test -- --findRelatedTests ./src",
+    "test:staged": "npm test --",
     "test:ci": "npm test -- --coverage"
   },
   "repository": {
