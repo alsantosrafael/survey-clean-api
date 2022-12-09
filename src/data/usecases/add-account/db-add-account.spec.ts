@@ -81,4 +81,16 @@ describe('DbAddAccount Usecase', () => {
       password: 'hashed_password'
     })
   })
+  test('Should throw if DbAddAccountRepository throws', async () => {
+    // Teste garante que o erro é repassado pra cima e não é tratado na classe em questão
+    const { sut, addAccountRepositoryStub } = makeSut()
+    jest.spyOn(addAccountRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const accountData = {
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'valid_password'
+    }
+    const promise = sut.add(accountData)
+    await expect(promise).rejects.toThrow()
+  })
 })
